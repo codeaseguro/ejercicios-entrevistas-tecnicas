@@ -9,7 +9,7 @@ Colección de ejercicios prácticos estilo entrevista técnica, sobre arquitectu
 - [Sistema de Entradas — Load Balancer y escalabilidad](./basic/02-sistema-de-entradas.md)
 
 ### 🟡 Nivel intermedio
-- [Preguntas AppSec nivel medio](./mid/01-preguntas-appsec-nivel.mid.md)
+- [Preguntas AppSec nivel medio](./mid/01-preguntas-appsec-nivel-mid.md)
 - [Entrevista sistema de reviews](./mid/reviews-system.md)
 
 ## Cómo usar este repositorio
