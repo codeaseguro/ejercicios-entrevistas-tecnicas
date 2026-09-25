@@ -9,6 +9,7 @@ Colección de ejercicios prácticos estilo entrevista técnica, sobre arquitectu
 - [Sistema de Entradas — Load Balancer y escalabilidad](./basic/02-sistema-de-entradas.md)
 - [Estructura de datos y casos reales](./basic/estructura-datos.md)
 - [Sistema de likes - Entrevista](./basic/03-sistema-likes.md)
+- [Acortador URLs - Entrevista](./basic/04-acortador-urls.md)
 
 ### 🟡 Nivel intermedio
 - [Preguntas AppSec nivel medio](./mid/01-preguntas-appsec-nivel-mid.md)
