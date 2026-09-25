@@ -7,6 +7,8 @@ Colección de ejercicios prácticos estilo entrevista técnica, sobre arquitectu
 ### 🟢 Nivel básico
 - [Tienda Online — Autorización a nivel de objeto (IDOR)](./basic/01-tienda-online.md)
 - [Sistema de Entradas — Load Balancer y escalabilidad](./basic/02-sistema-de-entradas.md)
+- [Estructura de datos y casos reales](./basic/estructura-daatos.md)
+- [Sistema de likes - Entrevista](./basic/03-sistema-likes.md)
 
 ### 🟡 Nivel intermedio
 - [Preguntas AppSec nivel medio](./mid/01-preguntas-appsec-nivel-mid.md)
