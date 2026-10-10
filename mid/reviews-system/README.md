@@ -1,7 +1,12 @@
 # Diseña un Sistema de Reseñas — Ejercicio de Entrevista Técnica (System Design)
 
 **Nivel:** Mid 
-**Tema:** Modelado de datos, separación lectura/escritura, cache, tradeoffs de consistencia
+**Tema:** Modelado de datos, separación lectura/escritura, cache, tradeoffs de consistencia.
+
+**Mira el video en youtube**
+
+[![Mira el video en YouTube](https://img.shields.io/badge/YouTube-Codea_Seguro-red?logo=youtube)](https://youtu.be/Pg7Rav1KF9I)
+[![Instagram](https://img.shields.io/badge/Instagram-@codeaseguro-E4405F?logo=instagram)](https://instagram.com/codeaseguro)
 
 ---
 
@@ -34,6 +39,45 @@ Diseñá el modelo de datos y la arquitectura de la solución. Justificá tus de
 ## 2. Solución propuesta
 
 ### 2.1 Modelo de datos
+```mermaid
+erDiagram
+    USERS ||--o{ REVIEWS : "escribe"
+    PRODUCTS ||--o{ REVIEWS : "recibe"
+    PRODUCTS ||--|| RATING_STATS : "tiene"
+
+    USERS {
+        bigint id PK
+        text name
+    }
+
+    PRODUCTS {
+        bigint id PK
+        text name
+    }
+
+    REVIEWS {
+        bigint id PK
+        bigint product_id FK
+        bigint user_id FK
+        smallint rating "1 a 5, CHECK constraint"
+        text comment
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at "soft delete"
+    }
+
+    RATING_STATS {
+        bigint product_id PK
+        bigint sum_rating "suma acumulada"
+        int total_reviews
+        int dist_1
+        int dist_2
+        int dist_3
+        int dist_4
+        int dist_5
+        timestamptz updated_at
+    }
+```
 
 ```sql
 CREATE TABLE reviews (
@@ -150,6 +194,35 @@ Múltiples réplicas de lectura detrás de un balanceador de lecturas, y subir e
 Ahí cambia la respuesta a la pregunta aclaratoria inicial, y con eso cambia todo el diseño: se necesitaría **consistencia fuerte** para esa lectura puntual — por ejemplo, leer directo de la Primary solo para el propio usuario recién después de escribir (patrón *read-your-writes*), mientras el resto de los visitantes sigue leyendo de la réplica. Es un buen ejemplo de por qué la primera pregunta aclaratoria del enunciado no es un detalle menor: define la arquitectura completa.
 
 ---
+
+## Podes probar esto en tu entorno local
+
+### Requisitos
+
+- **PostgreSQL 14 o superior** (el script usa `GENERATED ALWAYS AS IDENTITY`, disponible desde la versión 10, y funciones/triggers estándar de PL/pgSQL).
+- Un cliente para correr SQL: `psql`, [DBeaver](https://dbeaver.io/), TablePlus, o el que prefieras.
+- No requiere extensiones adicionales de PostgreSQL.
+
+### Cómo probarlo
+
+**Con Docker (recomendado, no instala nada en tu sistema):**
+
+```bash
+docker run --name reviews-db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+psql -h localhost -U postgres -f reviews-schema.sql
+```
+
+**Con Postgres instalado localmente:**
+
+```bash
+psql -h localhost -U tu_usuario -f reviews-schema.sql
+```
+
+El script es idempotente: podés correrlo varias veces sin problema, borra las tablas al principio (`DROP TABLE IF EXISTS ... CASCADE`) antes de recrearlas.
+
+> Nota: el script fue probado con PostgreSQL 16, pero no usa nada específico de esa versión — debería andar sin cambios desde la 14 en adelante.
+
+Ejecuta el script que se encuentra en /resources y comproba los resultados.
 
 ## 4. Checklist de una buena solución
 
