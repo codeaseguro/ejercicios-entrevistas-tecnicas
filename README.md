@@ -13,7 +13,7 @@ Colección de ejercicios prácticos estilo entrevista técnica, sobre arquitectu
 
 ### 🟡 Nivel intermedio
 - [Preguntas AppSec nivel medio](./mid/01-preguntas-appsec-nivel-mid.md)
-- [Entrevista sistema de reviews](./mid/reviews-system.md)
+- [Entrevista sistema de reviews](./mid/reviews-system/README.md)
 
 ## Cómo usar este repositorio
 
